@@ -16,6 +16,7 @@ import { AuthProvider } from './context/authContext';
 import { ClientProvider } from './context/clientContext';
 import { PropertieProvider } from './context/propertiesContext'
 import { PayProvider } from './context/payContext';
+import { EventProvider } from './context/eventContext'
 import ProtectedRoute from './ProtectedRoute';
 import AddProperties from './AddProperties';
 import AddClients from './AddClients';
@@ -32,28 +33,30 @@ function App() {
         <ClientProvider>
           <PropertieProvider>
             <PayProvider>
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
+              <EventProvider>
+                <BrowserRouter>
+                  <Routes>
+                    <Route path="/" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
 
-                  <Route element={<ProtectedRoute/>}>
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/account-info" element={<User />}/>
-                    <Route path="/properties" element={<Propiedades />} />
-                    <Route path="/clients" element={<Clientes />} />
-                    <Route path="/network" element={<Network />} />
-                    <Route path="/payments" element={<Payments />} />
-                    <Route path="/calendar" element={<Calendario />} />
-                    <Route path="/settings" element={<Accessibility />} />
-                    <Route path="/addproperty" element={<AddProperties />}  />
-                    <Route path="/addclients" element={<AddClients />} />
-                    <Route path="/editclients" element={<EditClients />} />
-                    <Route path="/details" element={<Details />} />
-                    <Route path="/detailsnetwork" element={<NetDetails />} />
-                  </Route>
-                </Routes>
-              </BrowserRouter>
+                    <Route element={<ProtectedRoute/>}>
+                      <Route path="/dashboard" element={<Dashboard />} />
+                      <Route path="/account-info" element={<User />}/>
+                      <Route path="/properties" element={<Propiedades />} />
+                      <Route path="/clients" element={<Clientes />} />
+                      <Route path="/network" element={<Network />} />
+                      <Route path="/payments" element={<Payments />} />
+                      <Route path="/calendar" element={<Calendario />} />
+                      <Route path="/settings" element={<Accessibility />} />
+                      <Route path="/addproperty" element={<AddProperties />}  />
+                      <Route path="/addclients" element={<AddClients />} />
+                      <Route path="/editclients" element={<EditClients />} />
+                      <Route path="/details" element={<Details />} />
+                      <Route path="/detailsnetwork" element={<NetDetails />} />
+                    </Route>
+                  </Routes>
+                </BrowserRouter>
+              </EventProvider>
             </PayProvider>
           </PropertieProvider>
         </ClientProvider>

@@ -15,8 +15,14 @@ import {
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './Calendario.css';
+import { useEvent } from './context/eventContext'
+import { useAuth } from './context/authContext'
 
 const Calendario = () => {
+
+  const { user } = useAuth();
+  const { postEvent } = useEvent();
+
   const location = useLocation();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [activities, setActivities] = useState([]);
@@ -44,14 +50,17 @@ const Calendario = () => {
 
   const handleAddActivity = () => {
     const newActivity = {
-      id: activities.length + 1,
       name: activityName,
-      description: activityDescription,
-      date: currentDate.toISOString().split('T')[0]  // solo se almacena la parte de la fecha
+      details: activityDescription,
+      state : 0,
+      date: currentDate.toISOString().split('T')[0],  // solo se almacena la parte de la fecha
+      usuarioid : user
     };
     setActivities([...activities, newActivity]);
     setActivityName('');
     setActivityDescription('');
+    console.log(newActivity)
+    postEvent(newActivity);
   };
 
   const handleDeleteActivity = id => {

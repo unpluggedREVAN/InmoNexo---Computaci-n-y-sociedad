@@ -72,11 +72,12 @@ CREATE TABLE Eventos (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     descripcion VARCHAR(100) NOT NULL,
-    fechaPublicacion DATE DEFAULT CURRENT_TIMESTAMP,
+    fechaEvento DATE NOT NULL,
     estado SMALLINT NOT NULL,
     usuarioId SMALLINT NOT NULL,
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
-    ON DELETE CASCADE
+    ON DELETE CASCADE,
+    fechaPublicacion DATE DEFAULT CURRENT_TIMESTAMP
 );
 
 --Usuarios de Pruebas

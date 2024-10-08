@@ -1,6 +1,7 @@
 # InmoNexo
 
-Proyecto del curso Computación y Sociedad del Instituto Tecnologico de Costa Rica.
+Instituto Tecnologico de Costa Rica
+Proyecto para el curso de Computación y Sociedad
 
 ## Integrantes
 * Jose Pablo Agüero Mora

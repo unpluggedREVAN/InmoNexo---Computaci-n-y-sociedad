@@ -1,3 +1,10 @@
+drop table IF EXISTS eventos Cascade;
+drop table IF EXISTS pagos Cascade;
+drop table IF EXISTS clientes Cascade;
+drop table IF EXISTS intereses Cascade;
+drop table IF EXISTS propiedades Cascade;
+drop table IF EXISTS usuarios Cascade;
+
 --Creación de todas las tablas
 CREATE TABLE Usuarios (
     id SERIAL PRIMARY KEY,
@@ -40,8 +47,8 @@ CREATE TABLE Clientes (
     correo VARCHAR(50) NOT NULL,
     origen VARCHAR(50) NOT NULL,
     tipo SMALLINT NOT NULL,
-    usuarioId SMALLINT NOT NULL,
-    propiedadId SMALLINT NOT NULL,
+    usuarioId SMALLINT DEFAULT 0,
+    propiedadId SMALLINT DEFAULT 0,
     descripcion VARCHAR(200) NOT NULL,
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id),
     FOREIGN KEY (propiedadId) REFERENCES Propiedades(id)
@@ -72,12 +79,6 @@ CREATE TABLE Eventos (
     fechaPublicacion DATE DEFAULT CURRENT_TIMESTAMP
 );
 
-SELECT * FROM Usuarios;
-SELECT * FROM Propiedades;
-SELECT * FROM Clientes;
-SELECT * FROM Eventos;
-SELECT * FROM Pagos;
-
 --Usuarios de Pruebas
 INSERT INTO Usuarios (nombre, correo, contrasena, rol)
 VALUES ('Dario Espinoza Aguilar', 'darioespinoza477@gmail.com', '12345678', 0),
@@ -93,13 +94,13 @@ VALUES ('Casa moderna', 'Girando a la derecha al fondo', 'Alquiler', 12000, 1, '
 
 --Clientes de prueba
 INSERT INTO Clientes (nombre, correo, origen, tipo, usuarioId, propiedadId, descripcion)
-VALUES ('Usuario Prueba', 'Prueba1@gmail.com', 'Facebook', 0, 1, 6, 'Interesado'),
-('Usuario Prueba 2', 'Prueba2@gmail.com', 'Facebook', 0, 1, 7, 'Interesado'),
-('Usuario Prueba 3', 'Prueba3@gmail.com', 'Facebook', 1, 1, 8, 'Interesado');
+VALUES ('Usuario Prueba', 'Prueba1@gmail.com', 'Facebook', 0, 1, 1, 'Interesado'),
+('Usuario Prueba 2', 'Prueba2@gmail.com', 'Facebook', 0, 1, 1, 'Interesado'),
+('Usuario Prueba 3', 'Prueba3@gmail.com', 'Facebook', 1, 1, 1, 'Interesado');
 
 
 --Eventos de prueba
 INSERT INTO Eventos (nombre, descripcion, estado, usuarioId, fechaEvento) VALUES ('Pago agua', 'Pagar el agua', 0, 1, CURRENT_TIMESTAMP);
 
 --Pagos
-INSERT INTO Pagos (detalles, monto, tipo, propiedadid,usuarioId) VALUES ('Pago de luz', 500, 'Mensual', 6,1);
+INSERT INTO Pagos (detalles, monto, tipo, propiedadid,usuarioId) VALUES ('Pago de luz', 500, 'Mensual', 1,1);

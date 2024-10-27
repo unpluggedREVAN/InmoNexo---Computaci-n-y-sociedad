@@ -111,8 +111,13 @@ export const deletePropertie = async (req, res) => {
         const deletePay = await pool.query('DELETE FROM Pagos WHERE id = $1', [propertiePays.rows[i].id])
     }
 
-    const result = await pool.query('DELETE FROM Propiedades WHERE id = $1', [req.params.id]);
-    return res.status(200).json(["Propiedad eliminada de forma exitosa."])
+    try {
+        const result = await pool.query('DELETE FROM Propiedades WHERE id = $1', [req.params.id]);
+        return res.status(200).json(["Propiedad eliminada de forma exitosa."])
+    } catch (err) {
+        return res.status(404).json([err.message])
+    } 
+    
 }
 
 export const getPropertieRed = async (req, res) => {

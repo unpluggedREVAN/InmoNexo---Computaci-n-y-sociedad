@@ -13,7 +13,7 @@ export const getClients = async (req, res) => {
         return res.status(404).json(["Usuario no encontrado"])
     }
 
-    const response = await pool.query('SELECT Clientes.id, Clientes.nombre, correo, origen, Clientes.tipo, Clientes.descripcion, Propiedades.nombre NombrePropiedad FROM Clientes JOIN Propiedades ON Clientes.propiedadid = Propiedades.id WHERE Clientes.usuarioid = $1;', [req.params.id])
+    const response = await pool.query('SELECT Clientes.id, Clientes.nombre, correo, origen, Clientes.tipo, Clientes.descripcion, Propiedades.nombre NombrePropiedad FROM Clientes LEFT JOIN Propiedades ON Clientes.propiedadid = Propiedades.id WHERE Clientes.usuarioid = $1;', [req.params.id])
 
     response.rows.forEach(function(cliente) {
         //const namePropiedad = await pool.query('SELECT nombre from Propiedades WHERE id = $1', [cliente.propiedadid])

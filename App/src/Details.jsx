@@ -203,7 +203,6 @@ const Details = () => {
     { name: 'Página principal', icon: faHome, path: '/dashboard' },
     { name: 'Propiedades', icon: faBuilding, path: '/properties' },
     { name: 'Clientes', icon: faUsers, path: '/clients' },
-    { name: 'Red InmoNexo', icon: faNetworkWired, path: '/network' },
     { name: 'Seguimiento pagos', icon: faMoneyCheckAlt, path: '/payments' },
     { name: 'Calendario', icon: faCalendarAlt, path: '/calendar' },
     { name: 'Configuración', icon: faCog, path: '/settings' },
@@ -306,9 +305,9 @@ const Details = () => {
             <button onClick={saveImages} aria-label="Guardar imágenes nuevas">Guardar Imágenes</button>
           </div>
 
-          {/* Contenedor para pagos concurrentes */}
+          {/* Contenedor para pagos recurrentes */}
           <div className="property-payments">
-            <h2>Pagos Concurrentes</h2>
+            <h2>Pagos Recurrentes</h2>
             <div>
                 {payments.map(payment => (
                 <div key={payment.id}>
@@ -379,20 +378,6 @@ const Details = () => {
 
             <div className="property-extra">
                 <h2>Adicional</h2>
-                <h3>Si la propiedad ha sido tomada por un agente de la Red InmoNexo revise su bandeja de entrada en el correo, es posible que este se haya puesto en contacto</h3>
-                <div>
-                    <label>
-                    <input type="checkbox" checked={isIncludedInNetwork} onChange={toggleNetworkStatus} />
-                    {isIncludedInNetwork ? ' Incluir propiedad en Red InmoNexo' : ' Excluir propiedad de Red InmoNexo'}
-                    </label>
-                    <button onClick={saveChangesNetwork}>Guardar Cambios</button>
-                </div>
-                <div>
-                    <label>Propiedad tomada por agente:</label>
-                    <span style={{ color: isTakenByAgent ? 'green' : 'red' }}>
-                    {isTakenByAgent ? ' Sí' : ' No'}
-                    </span>
-                </div>
                 <div>
                     <button onClick={deleteProperty}>Eliminar Propiedad</button>
                 </div>

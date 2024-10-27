@@ -55,7 +55,6 @@ const Propiedades = () => {
     { name: 'Página principal', icon: faHome, path: '/dashboard' },
     { name: 'Propiedades', icon: faBuilding, path: '/properties' },
     { name: 'Clientes', icon: faUsers, path: '/clients' },
-    { name: 'Red InmoNexo', icon: faNetworkWired, path: '/network' },
     { name: 'Seguimiento pagos', icon: faMoneyCheckAlt, path: '/payments' },
     { name: 'Calendario', icon: faCalendarAlt, path: '/calendar' },
     { name: 'Configuración', icon: faCog, path: '/settings' },
@@ -103,7 +102,6 @@ const Propiedades = () => {
         </div>
         <div className="fixed-footer">
           <Link to="/clients" className="btn" aria-label="Ver lista de clientes">Ver lista de clientes</Link>
-          <Link to="/network" className="btn" aria-label="Entrar a Red InmoNexo">Entrar a Red InmoNexo</Link>
         </div>
       </div>
     </div>

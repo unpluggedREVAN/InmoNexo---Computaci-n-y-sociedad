@@ -21,17 +21,11 @@ CREATE TABLE Propiedades (
     inRed SMALLINT NOT NULL DEFAULT 0,
     getAgent SMALLINT NOT NULL DEFAULT 0,
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
-    ON DELETE CASCADE
 );
-
-ALTER TABLE Propiedades
-ADD COLUMN inRed SMALLINT NOT NULL,
-ADD COLUMN getAgent SMALLINT NOT NULL
-DELETE ON CASCADE;
 
 CREATE TABLE Intereses (
     id SERIAL PRIMARY KEY,
-    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha DATE DEFAULT CURRENT_TIMESTAMP,
     tipo SMALLINT NOT NULL,
     propiedadId SMALLINT NOT NULL,
     usuarioId SMALLINT NOT NULL,
@@ -49,10 +43,8 @@ CREATE TABLE Clientes (
     usuarioId SMALLINT NOT NULL,
     propiedadId SMALLINT NOT NULL,
     descripcion VARCHAR(200) NOT NULL,
-    FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
-    ON DELETE CASCADE,
+    FOREIGN KEY (usuarioId) REFERENCES Usuarios(id),
     FOREIGN KEY (propiedadId) REFERENCES Propiedades(id)
-    ON DELETE CASCADE
 );
 
 CREATE TABLE Pagos (
@@ -80,6 +72,12 @@ CREATE TABLE Eventos (
     fechaPublicacion DATE DEFAULT CURRENT_TIMESTAMP
 );
 
+SELECT * FROM Usuarios;
+SELECT * FROM Propiedades;
+SELECT * FROM Clientes;
+SELECT * FROM Eventos;
+SELECT * FROM Pagos;
+
 --Usuarios de Pruebas
 INSERT INTO Usuarios (nombre, correo, contrasena, rol)
 VALUES ('Dario Espinoza Aguilar', 'darioespinoza477@gmail.com', '12345678', 0),
@@ -87,39 +85,21 @@ VALUES ('Dario Espinoza Aguilar', 'darioespinoza477@gmail.com', '12345678', 0),
 
 --Propiedades de prueba
 INSERT INTO Propiedades (nombre, direccion, tipo, precio, estado, descripcion, capacidad, usuarioId)
-VALUES ('Casa moderna', 'Girando a la derecha al fondo', 'Alquiler', 12000, 1, 'Casa futurista', 12, 5),
-('Casa de playa', 'Playa Samara', 'Venta', 200000, 1, 'Casa de Playa', 6, 5),
-('Apartamentos de lujo', 'Escazu', 'Alquiler', 1000, 1, 'Apartamentos con muchos beneficios', 3, 5),
+VALUES ('Casa moderna', 'Girando a la derecha al fondo', 'Alquiler', 12000, 1, 'Casa futurista', 12, 1),
+('Casa de playa', 'Playa Samara', 'Venta', 200000, 1, 'Casa de Playa', 6, 1),
+('Apartamentos de lujo', 'Escazu', 'Alquiler', 1000, 1, 'Apartamentos con muchos beneficios', 3, 1),
 ('Apartamento para 2 personas', 'El Guarco, Cartago', 'Alquiler', 3000, 1, 'Apartamento comodo', 2, 2),
 ('Residencias estudiantiles', 'Occidental, Cartago', 'Compra', 200, 1, 'Residencias para estudiantes', 2, 2);
 
 --Clientes de prueba
 INSERT INTO Clientes (nombre, correo, origen, tipo, usuarioId, propiedadId, descripcion)
-VALUES ('Usuario Prueba', 'Prueba1@gmail.com', 'Facebook', 0, 5, 2, 'Interesado'),
-('Usuario Prueba 2', 'Prueba2@gmail.com', 'Facebook', 0, 5, 1, 'Interesado'),
-('Usuario Prueba 3', 'Prueba3@gmail.com', 'Facebook', 1, 5, 4, 'Interesado');
+VALUES ('Usuario Prueba', 'Prueba1@gmail.com', 'Facebook', 0, 1, 6, 'Interesado'),
+('Usuario Prueba 2', 'Prueba2@gmail.com', 'Facebook', 0, 1, 7, 'Interesado'),
+('Usuario Prueba 3', 'Prueba3@gmail.com', 'Facebook', 1, 1, 8, 'Interesado');
 
-
---Clientes de prueba
-INSERT INTO Clientes (nombre, correo, origen, tipo, usuarioId)
-VALUES ('Usuario ', 'usuario1@gmail.com', 'Facebook', 0, 3),
-('Usuario  2', 'usuario2@gmail.com', 'Facebook', 0, 3),
-('Usuario  3', 'usuario3@gmail.com', 'Facebook', 1, 3);
 
 --Eventos de prueba
-INSERT INTO Eventos (nombre, descripcion, estado, usuarioId) VALUES ("Pago agua", "Pagar el agua", 0, 5);
+INSERT INTO Eventos (nombre, descripcion, estado, usuarioId, fechaEvento) VALUES ('Pago agua', 'Pagar el agua', 0, 1, CURRENT_TIMESTAMP);
 
 --Pagos
-INSERT INTO Pagos (detalles, monto, tipo, propiedadid) VALUES ('Pago de luz', 500, 'Mensual', 2);
-
-SELECT * FROM Usuarios;
-SELECT * FROM Propiedades;
-SELECT * FROM Clientes;
-SELECT * FROM Eventos;
-SELECT * FROM Pagos;
-
-DROP TABLE Usuarios;
-DROP TABLE Propiedades CASCADE;
-DROP TABLE Clientes;
-DROP TABLE Eventos;
-DROP TABLE Pagos;
+INSERT INTO Pagos (detalles, monto, tipo, propiedadid,usuarioId) VALUES ('Pago de luz', 500, 'Mensual', 6,1);

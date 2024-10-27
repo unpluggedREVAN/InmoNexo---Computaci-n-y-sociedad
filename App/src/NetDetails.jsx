@@ -89,7 +89,6 @@ const NetDetails = () => {
     { name: 'Página principal', icon: faHome, path: '/dashboard' },
     { name: 'Propiedades', icon: faBuilding, path: '/properties' },
     { name: 'Clientes', icon: faUsers, path: '/clients' },
-    { name: 'Red InmoNexo', icon: faNetworkWired, path: '/network' },
     { name: 'Seguimiento pagos', icon: faMoneyCheckAlt, path: '/payments' },
     { name: 'Calendario', icon: faCalendarAlt, path: '/calendar' },
     { name: 'Configuración', icon: faCog, path: '/settings' },

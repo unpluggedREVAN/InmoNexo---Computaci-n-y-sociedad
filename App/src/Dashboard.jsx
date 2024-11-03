@@ -40,6 +40,11 @@ const Dashboard = () => {
   // Simulación de datos de clientes, reemplazar con llamada al API
  
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  };
+
   const menuItems = [
     { name: 'Página principal', icon: faHome, path: '/dashboard' },
     { name: 'Propiedades', icon: faBuilding, path: '/properties' },
@@ -75,6 +80,12 @@ const Dashboard = () => {
             <Link to="/account-info" className="account-info-btn" aria-label="Configuración de la cuenta">
               <FontAwesomeIcon icon={faCog} className="menu-icon" />
             </Link>
+            <button 
+              onClick={handleLogout} 
+              className="logout-btn" 
+              aria-label="Salir de la sesión">
+              Salir de sesión
+            </button>
           </div>
         </nav>
         <section className="content" aria-label="Resumen del dashboard">

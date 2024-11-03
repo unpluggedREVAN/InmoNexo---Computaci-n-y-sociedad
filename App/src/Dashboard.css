@@ -152,4 +152,36 @@
     background-color: #0056b3;
   }
   
+  .user-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .account-info-btn {
+    color: #ffffff;
+    font-size: 1.5rem; /* Ajusta el tamaño del icono */
+  }
+  
+  .logout-btn {
+    background-color: #3a3a3a; /* Fondo más oscuro para armonizar */
+    color: #ffffff; /* Color de texto blanco */
+    padding: 8px 12px; /* Espaciado interno para mejorar apariencia */
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 1rem; /* Tamaño de fuente */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Animación para hover */
+    margin-top: 0px;
+    margin-right: 20px;
+  }
+  
+  .logout-btn:hover {
+    background-color: #4CAF50; /* Color de fondo en hover */
+  }
+  
+  .logout-btn:focus {
+    outline: none;
+    box-shadow: 0 0 4px #4CAF50; /* Sombra para enfoque accesible */
+  }
   

@@ -204,8 +204,8 @@ const Details = () => {
     { name: 'Propiedades', icon: faBuilding, path: '/properties' },
     { name: 'Clientes', icon: faUsers, path: '/clients' },
     { name: 'Seguimiento pagos', icon: faMoneyCheckAlt, path: '/payments' },
-    { name: 'Calendario', icon: faCalendarAlt, path: '/calendar' },
-    { name: 'Configuración', icon: faCog, path: '/settings' },
+    { name: 'Calendario', icon: faCalendarAlt, path: '/calendar' }
+    //{ name: 'Configuración', icon: faCog, path: '/settings' },
   ];
 
   return (

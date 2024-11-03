@@ -61,5 +61,7 @@ export const deleteEvent = async (req, res) => {
     if (!isValid){
         return res.status(400).json(["Parametros inválidos"]);
     }
-    // TODO: Hacer lo que falta de la logica para este controller
+    
+    const response = await pool.query('DELETE FROM Eventos WHERE id = $1', [req.params.id])
+    return res.status(200).json(response.rows);
 }

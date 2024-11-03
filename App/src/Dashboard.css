@@ -61,10 +61,6 @@
     height: 60px; 
   }
   
-  .user-container {
-    /* Botón de usuario */
-  }
-  
   .account-info-btn {
     background: none;
     border: none;
@@ -84,6 +80,75 @@
     margin-top: 2rem;
     font-size: 2.5rem;
   }
+
+  .stats {
+    width: 120%;
+    margin-left: -60px;
+    display: flex;
+    justify-content: space-around;
+  }
   
-  /* Agregar aquí */
+  .stat-card {
+    margin-right: 10px;
+    background-color: #292C33;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 22%; 
+  }
+  
+  .stat-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .dual-container {
+    margin-left: -60px;
+    width: 120%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .activity {
+    margin-right: 10px;
+    background-color: #292C33;
+    padding: 20px;
+    border-radius: 10px;
+    width: 70%; 
+  }
+
+  .recent-clients {
+    margin-right: 10px;
+    background-color: #292C33;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%; 
+  }
+  
+  .recent-clients ul {
+    list-style: none;
+  }
+
+  .actions {
+    margin-top: 40px;
+  }
+  
+  .actions .action-button {
+    margin-right: 20px;
+    width: 500px;
+    background-color: #a64cda;
+    color: white;
+    padding: 15px 30px; 
+    font-size: 1.2rem; 
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .actions .action-button:hover {
+    background-color: #0056b3;
+  }
+  
   

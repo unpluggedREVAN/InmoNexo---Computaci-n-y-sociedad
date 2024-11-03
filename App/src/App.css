@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+/* Estilos globales para alto contraste */
+.high-contrast {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Asegúrate de que todos los elementos que necesiten cambiar en modo de alto contraste tengan la clase adecuada o sean hijos de un contenedor con la clase .high-contrast */
+.high-contrast button,
+.high-contrast a,
+.high-contrast p {
+  /* Estilos específicos de alto contraste para elementos */
+}

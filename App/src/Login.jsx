@@ -1,30 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css'; 
 import backgroundImage from './llaves_casa.jpg';
+import { useAuth } from './context/authContext'
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate(); // Hook para navegar
 
+  const { login,isAuthenticated,user } = useAuth();
+
   const loginStyle = {
     height: '100vh',
-    width: '100vw',
+    width: '100vw', 
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#2c2c2c', 
   };
 
-  const handleLogin = (e) => {
+  useEffect(() => {
+    if(isAuthenticated){
+      navigate('/dashboard')
+      console.log("User: ", user);
+    }
+  }, [isAuthenticated])
+  
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Se alambra un inicio de sesión fácil para pruebas
-     if (email === 'admin@admin.com' && password === 'admin') {
-      navigate('/dashboard'); 
-    } else {
-      alert('Credenciales incorrectas'); // Alerta temporal
-    } 
+    const dataUser = {
+      email : email,
+      password : password
+    }
+
+    login(dataUser)
   };
 
   return (
@@ -43,6 +53,7 @@ const Login = () => {
                 placeholder="Ingresa tu correo"
                 onChange={e => setEmail(e.target.value)}
                 required
+                aria-required="true"
                 />
             </div>
             <div className="form-group">
@@ -54,13 +65,14 @@ const Login = () => {
                 placeholder="Ingresa tu contraseña"
                 onChange={e => setPassword(e.target.value)}
                 required
+                aria-required="true"
                 />
                 <a href="/forgot-password" className="forgot-password">¿Olvidaste tu contraseña?</a>
             </div>
-          <button type="submit" className="login-button">Iniciar sesión</button>
+          <button type="submit" className="login-button" aria-label="Iniciar sesión">Iniciar sesión</button>
         </form>
         <div className="register-link">
-            ¿Aún no tienes cuenta? <Link to="/register">Crea una</Link>
+            ¿Aún no tienes cuenta? <Link to="/register" aria-label="Crea una cuenta nueva">Crea una</Link>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 import './Register.css'; 
+import {registerRequest} from './api/auth.js'
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -10,12 +11,32 @@ const Register = () => {
 
   const navigate = useNavigate(); 
 
-  const handleRegistration = (e) => {
+  const handleRegistration = async (e) => {
     e.preventDefault();
     // Nota para Darío: lógica de registro aquí con el backend
-    console.log('Registro con:', name, email, password, role);
+    var roleNumber = 0;
+    if (role === "agent"){
+      roleNumber = 1;
+    }
+    const dataRegister = {
+      name : name,
+      email : email,
+      password : password,
+      rol : roleNumber
+    }
+
+    try{
+      const response = await registerRequest(dataRegister);
+      console.log("Response: ", response)
+      console.log('Registro con:', name, email, password, role);
+      alert("Registro realizado correctamente")
+      navigate('/'); // Redirige a la página de inicio de sesión
+
+    }catch (error){
+      console.log(error.response.data)
+      alert(error.response.data[0])
+    }
     
-    navigate('/'); // Redirige a la página de inicio de sesión
   };
 
   return (
@@ -32,6 +53,7 @@ const Register = () => {
             value={name}
             onChange={e => setName(e.target.value)}
             required
+            aria-required="true"
           />
         </div>
         <div className="form-group">
@@ -43,6 +65,7 @@ const Register = () => {
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
+            aria-required="true"
           />
         </div>
         <div className="form-group">
@@ -54,6 +77,7 @@ const Register = () => {
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
+            aria-required="true"
           />
           <label htmlFor="password">¿Qué eres?</label>
         </div>
@@ -65,6 +89,7 @@ const Register = () => {
             value="owner"
             checked={role === 'owner'}
             onChange={e => setRole(e.target.value)}
+            aria-labelledby="role-label owner"
           />
           <label htmlFor="owner">Propietario</label>
           <input
@@ -74,6 +99,7 @@ const Register = () => {
             value="agent"
             checked={role === 'agent'}
             onChange={e => setRole(e.target.value)}
+            aria-labelledby="role-label agent"
           />
           <label htmlFor="agent">Agente Inmobiliario</label>
         </div>

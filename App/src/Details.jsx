@@ -250,8 +250,8 @@ const Details = () => {
             <input type="text" name="address" value={property.address} onChange={handleInputChange} placeholder="Dirección" />
             <label htmlFor="type">Tipo:</label>
             <select name="type" value={property.type} onChange={handleInputChange}>
-              <option value="Alquiler">Alquiler</option>
-              <option value="Compra">Compra</option>
+              <option value="alquiler">Alquiler</option>
+              <option value="venta">Compra</option>
             </select>
             <label htmlFor="price">Precio:</label>
             <input type="number" name="price" value={property.price} onChange={handleInputChange} placeholder="Precio" />

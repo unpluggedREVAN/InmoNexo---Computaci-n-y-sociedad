@@ -31,6 +31,22 @@ const Calendario = () => {
   const formattedCurrentDate = currentDate.toISOString().split('T')[0];
   const [activities, setActivities] = useState([]);
   const [userId, setUserId] = useState(user);
+
+  // Modal para editar actividades
+  const [modalVisible, setModalVisible] = useState(false);
+  const [editId, setEditId] = useState(null);
+  const handleOpenModal = (activity) => {
+    setEditId(activity.id);
+    setActivityName(activity.nombre);
+    setActivityDescription(activity.descripcion);
+    setModalVisible(true);
+  };
+  const handleCloseModal = () => {
+    setModalVisible(false);
+    setEditId(null);
+    setActivityName('');
+    setActivityDescription('');
+  };
   
   const [activityName, setActivityName] = useState('');
   const [activityDescription, setActivityDescription] = useState('');
@@ -67,6 +83,10 @@ const Calendario = () => {
   };
 
   const handleAddActivity = async() => {
+    if (!activityName || !activityDescription) {
+      alert('Por favor, ingrese un nombre y una descripción para la actividad.');
+      return;
+    }
     const newActivity = {
       name: activityName,
       details: activityDescription,
@@ -108,8 +128,9 @@ const Calendario = () => {
       state : 0
     };
     try {
-      await editEvent(id, updatedData); // Llama a editEvent para actualizar el evento en el backend
-      await getEvents(userId); // Recarga los eventos para reflejar el cambio
+      await editEvent(editId, updatedData); // Llama a editEvent para actualizar el evento en el backend
+      await getEvents(user); // Recarga los eventos para reflejar el cambio
+      handleCloseModal();
     } catch (error) {
       console.error("Error al editar el evento:", error);
     }
@@ -160,7 +181,9 @@ const Calendario = () => {
               {filteredEvents.map(activity => (
                 <div key={activity.id} className="activity">
                   <span>{activity.nombre}</span>
-                  <button onClick={() => handleEditActivity(activity.id)} aria-label={`Editar ${activity.nombre}`}><FontAwesomeIcon icon={faEdit} /></button>
+                  <button onClick={() => handleOpenModal(activity)} aria-label={`Editar ${activity.nombre}`}>
+                    <FontAwesomeIcon icon={faEdit} />
+                  </button>
                   <button onClick={() => handleDeleteActivity(activity.id)} aria-label={`Eliminar ${activity.nombre}`}><FontAwesomeIcon icon={faTrash} /></button>
                 </div>
               ))}
@@ -171,6 +194,25 @@ const Calendario = () => {
           </div>
         </section>
       </div>
+      {modalVisible && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h1>Editar Actividad</h1>
+            <input
+              value={activityName}
+              onChange={e => setActivityName(e.target.value)}
+              placeholder="Nombre de actividad"
+            />
+            <textarea
+              value={activityDescription}
+              onChange={e => setActivityDescription(e.target.value)}
+              placeholder="Descripción de actividad"
+            />
+            <button onClick={handleEditActivity}>Guardar Cambios</button>
+            <button onClick={handleCloseModal}>Cancelar</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

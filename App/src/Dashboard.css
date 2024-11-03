@@ -152,6 +152,8 @@
     background-color: #0056b3;
   }
   
+  /*Cambios para salir de sesion*/
+
   .user-container {
     display: flex;
     align-items: center;
